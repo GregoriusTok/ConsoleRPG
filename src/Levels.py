@@ -13,13 +13,23 @@ class Level1():
             "Go to the school to figure out everything you want to know."
         ])
 
+        self.Nathan = NPC("Nathan", [3, 6], [
+            "I don' know nothin'",
+            "Get away from me."
+        ])
+
         self.Richard = Enemy("Richard", [2, 2], [
             "YOU WILL DIE!!!", 
             "YOU KNOW WHYYY!!!"
         ], 12, {"PUNCH": 3})
 
-        self.NPCList = [self.Jerry]
-        self.EnemyList = [self.Richard]
+        self.Joel = Enemy("Joel", [2, 4], [
+            "I hate you,",
+            "Prepare to die"
+        ], 5, {"KICK": 5})
+
+        self.NPCList = [self.Jerry, self.Nathan]
+        self.EnemyList = [self.Richard, self.Joel]
 
         self.update(player)
         self.draw()
