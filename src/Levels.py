@@ -5,49 +5,18 @@ class Level1():
         self.Height, self.Width = 10, 10
 
         #Entities:
-        self.Jerry = NPC("Jerry", [5, 5], [
-            "Hey there,",
-            "How you doing?",
-            "Good?",
-            "That means no one's told you yet.",
-            "Go to the school to figure out everything you want to know."
-        ])
 
-        self.Nathan = NPC("Nathan", [3, 6], [
-            "I don' know nothin'",
-            "Get away from me."
-        ])
+        self.NPCList = []
+        self.EnemyList = []
 
-        self.Richard = Enemy("Richard", [2, 2], [
-            "YOU WILL DIE!!!", 
-            "YOU KNOW WHYYY!!!"
-        ], 12, {"PUNCH": 3})
-
-        self.Joel = Enemy("Joel", [2, 4], [
-            "I hate you,",
-            "Prepare to die"
-        ], 5, {"KICK": 5})
-
-        self.NPCList = [self.Jerry, self.Nathan]
-        self.EnemyList = [self.Richard, self.Joel]
+        #Set the first layout
+        self.Lay1()
 
         self.update(player)
-        self.draw()
-        
+        self.draw() 
 
     def update(self, player):
-        self.Layout = [
-            ["  ", "  ", "--", "  ", "  ", "  ", "  ", "  ", "--", "''"],
-            ["  ", "--", "  ", "  ", "  ", "  ", "  ", "--", "  ", "  "],
-            ["  ", "--", "  ", "  ", "  ", "  ", "  ", "--", "  ", "  "],
-            ["  ", "''", "--", "  ", "  ", "  ", "--", "  ", "''", "  "],
-            ["''", "  ", "--", "  ", "  ", "  ", "  ", "--", "  ", "  "],
-            ["  ", "  ", "--", "  ", "  ", "  ", "  ", "--", "  ", "  "],
-            ["  ", "--", "  ", "  ", "  ", "  ", "  ", "--", "''", "  "],
-            ["  ", "--", "  ", "  ", "  ", "  ", "--", "  ", "  ", "  "],
-            ["  ", "--", "  ", "  ", "  ", "  ", "--", "''", "  ", "  "],
-            ["''", "  ", "--", "  ", "  ", "--", "  ", "  ", "  ", "  "]
-        ]
+        self.Layout = [row[:] for row in self.LayoutTemp]
 
         for i in self.NPCList: #Check Collision w/ NPCs
             if player.Location == i.Location:
@@ -82,8 +51,35 @@ class Level1():
 
         self.Layout[player.Location[1]][player.Location[0]] = "@@" #Set Player initial position
 
+    def Lay1(self):
+        self.LayoutTemp = [
+            ["  ", "  ", "--", "  ", "  ", "  ", "  ", "  ", "--", "''"],
+            ["  ", "--", "  ", "  ", "  ", "  ", "  ", "--", "  ", "  "],
+            ["  ", "--", "  ", "  ", "  ", "  ", "  ", "--", "  ", "  "],
+            ["  ", "''", "--", "  ", "  ", "  ", "--", "  ", "''", "  "],
+            ["''", "  ", "--", "  ", "  ", "  ", "  ", "--", "  ", "  "],
+            ["  ", "  ", "--", "  ", "  ", "  ", "  ", "--", "  ", "  "],
+            ["  ", "--", "  ", "  ", "  ", "  ", "  ", "--", "''", "  "],
+            ["  ", "--", "  ", "  ", "  ", "  ", "--", "  ", "  ", "  "],
+            ["  ", "--", "  ", "  ", "  ", "  ", "--", "''", "  ", "  "],
+            ["''", "  ", "--", "  ", "  ", "--", "  ", "  ", "  ", "  "]
+        ]
+
+        Johann = NPC("Johann", [5,5], [
+            "Yo duuuuuude, ",
+            "Its def time."
+        ])
+
+        John = Enemy("John", [5, 2], [
+            "Yo",
+            "Lets fight"
+        ], 5, {"KICK": 1})
+
+        self.NPCList = [Johann]
+        self.EnemyList = [John]
+
     def draw(self):
-        print()
+        print("=" * 29)
         for i in self.Layout:
             print(*i)
 
